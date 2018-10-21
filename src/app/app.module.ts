@@ -16,7 +16,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ClipboardModule } from 'ngx-clipboard';
-import { ProfileCacheService, PydtSharedModule } from 'pydt-shared';
+import { GameSpeedPipe, MapPipe, MapSizePipe, PydtSharedModule, ProfileCacheService } from 'pydt-shared';
 import { environment } from '../environments/environment';
 import * as envVars from '../envVars';
 import { AppComponent } from './app.component';
@@ -41,12 +41,7 @@ import { UserInfoComponent } from './user/info.component';
 import { UserProfileComponent } from './user/profile.component';
 import { UserStatsComponent } from './user/stats.component';
 
-export function configFactory() {
-  return new Configuration({
-    apiKeys: {},
-    basePath: envVars.apiUrl
-  });
-}
+
 
 export function pcsFactory(api: UserService) {
   return new ProfileCacheService({
@@ -78,7 +73,12 @@ if (environment.name === 'dev') {
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
-    ApiModule.forRoot(configFactory),
+    ApiModule.forRoot(() => {
+      return new Configuration({
+        apiKeys: {},
+        basePath: envVars.apiUrl
+      });
+    }),
     ClipboardModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -113,7 +113,7 @@ if (environment.name === 'dev') {
     UserProfileComponent,
     UserInfoComponent,
     UserGamesComponent,
-    UserStatsComponent,
+    UserStatsComponent
   ],
   providers: [
     AuthService,
