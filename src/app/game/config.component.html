@@ -111,6 +111,12 @@
   </div>
 </div>
 <div class="form-group">
+  <label for="webhookUrl" class="col-sm-3 control-label">Webhook URL:</label>
+  <div class="col-sm-9">
+    <input type="text" class="form-control" id="webhookUrl"[(ngModel)]="model.webhookUrl" name="webhookUrl">
+  </div>
+</div>
+<div class="form-group">
   <label for="displayName" class="col-sm-3 control-label">Allow users to join after start:</label>
   <div class="col-sm-9">
     <div class="checkbox">
